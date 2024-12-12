@@ -52,7 +52,6 @@ func main() {
 	prefix := flag.Arg(0)
 
 	// generate and print resource names
-	fmt.Printf("Generating %d resource names with %d parts each:\n", *count, *parts)
 	for i := 0; i < *count; i++ {
 		name := generateResourceName(*parts, *separator, prefixes, celestialTerms, suffixes)
 		fmt.Printf("%s%s%s\n", prefix, *separator, name)
