@@ -13,36 +13,39 @@ go install github.com/adegoodyer/planetary-resource-generator@latest
 
 ## Usage
 ```bash
-planetary-resource-generator
-Usage: planetary-resource-generator [options]
+Usage: planetary-resource-generator [options] <prefix>
 Options:
-  -p <number>   number of name parts (default: 3)
+  -p <number>   number of name parts (default: 2)
   -s <string>   separator to use between name parts (default: -)
-  -n <number>   number of names to generate (default: 0, shows usage)
+  -n <number>   number of names to generate (default: 3)
+Arguments:
+  <prefix>      required string to prefix each generated name (e.g. example-resource)
 ```
 
 ## Examples
 ```bash
 # Generate default number of names with default options
-planetary-resource-generator -n 5
+planetary-resource-generator -n 2
+# example-resource-orbit-alpha
+# example-resource-nebula-solar
 
 # Specify custom separator
-planetary-resource-generator -n 5 -s _
+planetary-resource-generator -n 2 -s _
+# example_resource_theta_gamma
+# example_resource_kappa_galaxy
 
 # Generate names with 4 parts instead of 3
 planetary-resource-generator -n 5 -p 4
+# example-resource-galaxy-interstellar-nova-orbit
+# example-resource-zeta-orbit-delta-interstellar
 
 # Combine custom separator and parts
 planetary-resource-generator -n 5 -p 4 -s .
-```
-
-## Sample Output
-```bash
-planetary-resource-generator -n 3 -p 4 -s -
-Generating 3 resource names with 4 parts each:
-stellar-quasar-alpha-galaxy
-orbit-supernova-beta-comet
-cosmic-nebula-zeta-nova
+# example.resource.stellar.stellar.astro.pulsar
+# example.resource.zeta.lambda.galaxy.beta
+# example.resource.cosmic.galactic.nebula.asteroid
+# example.resource.asteroid.interstellar.alpha.supernova
+# example.resource.galactic.stellar.zeta.delta
 ```
 
 ## Tags
