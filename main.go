@@ -28,30 +28,33 @@ func main() {
 	celestialTerms := []string{"nebula", "quasar", "pulsar", "galaxy", "comet", "asteroid", "meteor", "nova", "blackhole", "supernova"}
 	suffixes := []string{"alpha", "beta", "gamma", "delta", "epsilon", "zeta", "theta", "iota", "kappa", "lambda"}
 
-	// parse single-letter flags
-	parts := flag.Int("p", 3, "number of name parts to include in the resource name")
+	// parse flags
+	parts := flag.Int("p", 2, "number of name parts to include in the resource name")
 	separator := flag.String("s", "-", "separator to use between name parts")
-	count := flag.Int("n", 0, "number of names to generate (default: show usage)")
+	count := flag.Int("n", 3, "number of names to generate (default: 3)")
 	flag.Usage = func() {
-		fmt.Println("Usage: go run main.go [options]")
+		fmt.Println("Usage: planetary-resource-generator [options] <prefix>")
 		fmt.Println("Options:")
-		fmt.Println("  -p <number>   number of name parts (default: 3)")
+		fmt.Println("  -p <number>   number of name parts (default: 2)")
 		fmt.Println("  -s <string>   separator to use between name parts (default: -)")
-		fmt.Println("  -n <number>   number of names to generate (default: 0, shows usage)")
+		fmt.Println("  -n <number>   number of names to generate (default: 3)")
+		fmt.Println("Arguments:")
+		fmt.Println("  <prefix>      required string to prefix each generated name (e.g. example-resource)")
 	}
 
 	flag.Parse()
 
-	// show usage if no flags or count is specified
-	if *count == 0 {
+	// check if prefix is provided
+	if flag.NArg() != 1 {
 		flag.Usage()
 		return
 	}
+	prefix := flag.Arg(0)
 
 	// generate and print resource names
 	fmt.Printf("Generating %d resource names with %d parts each:\n", *count, *parts)
 	for i := 0; i < *count; i++ {
 		name := generateResourceName(*parts, *separator, prefixes, celestialTerms, suffixes)
-		fmt.Println(name)
+		fmt.Printf("%s%s%s\n", prefix, *separator, name)
 	}
 }
